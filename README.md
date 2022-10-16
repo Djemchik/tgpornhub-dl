@@ -4,15 +4,12 @@ To build the bot using this source-code, setup all vars and fill it at pornhub/c
 
 ## Run
 
-'''
-git clone https://github.com/levina-lab/tgpornhub-dl
-
-cd tgpornhub-dl
-
-pip3 install install -Ur requirements.txt
-
-python3 -m pornhub
-'''
+```console
+root@ubuntu~ $ git clone https://github.com/levina-lab/tgpornhub-dl
+root@ubuntu~ $ cd tgpornhub-dl
+root@ubuntu~ $ pip3 install install -Ur requirements.txt
+root@ubuntu~ $ python3 -m pornhub
+```
 
 ## Others
 
