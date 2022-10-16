@@ -1,4 +1,5 @@
+tgcrypto
+pyrogram
+psutil
 pornhub-api==0.2.0
-Pyrogram==2.0.58
-TgCrypto==1.2.4
 youtube-dl==2021.6.6
