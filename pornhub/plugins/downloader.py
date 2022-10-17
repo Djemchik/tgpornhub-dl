@@ -43,7 +43,8 @@ def url(filter, client, update):
 url_filter = filters.create(url, name="url_filter")
 
 
-@Client.on_message(~filters.edited & filters.incoming & filters.private, group=-1)
+@Client.on_message(~filters.incoming & filters.private, group=-1)
+@Client.on_edited_message()
 async def force_channel(c: Client, u: Message):
     if not sub_chat:
         return
@@ -150,7 +151,7 @@ async def inline_search(c: Client, q: InlineQuery):
     )
 
 
-@app.on_message(url_filter)
+@Client.on_message(url_filter)
 async def options(c: Client, m: Message):
     print(m.text)
     await m.reply_text(
@@ -171,7 +172,7 @@ async def options(c: Client, m: Message):
     )
 
 
-@app.on_callback_query(filters.regex("^d"))
+@Client.on_callback_query(filters.regex("^d"))
 async def get_video(c: Client, q: CallbackQuery):
     url = q.data.split("_",1)[1]
     msg = await q.message.edit("Downloading...")

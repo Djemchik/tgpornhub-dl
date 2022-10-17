@@ -1,3 +1,4 @@
+from typing import Union
 from pyrogram import Client, filters
 from pyrogram.errors import MessageNotModified, QueryIdInvalid
 from pyrogram.types import (
@@ -16,16 +17,15 @@ button_a1 = InlineKeyboardMarkup(
         [
             InlineKeyboardButton(
                 text="✅ Agree & Continue",
-                callback_data="",
+                callback_data="final_page",
             )
-        ],
-        [
+        ],[
             InlineKeyboardButton(
                 text="❌ Cancel",
                 callback_data="home_intro",
             ),
         ],
-    ],
+    ]
 )
 
 
@@ -34,19 +34,19 @@ button_a2 = InlineKeyboardMarkup(
         [
             InlineKeyboardButton(
                 text="search here", switch_inline_query_current_chat="",
-            ),
+            )
         ],[
             InlineKeyboardButton(
                 text="search in chat", switch_inline_query="",
             ),
         ],
-    ],
+    ]
 )
 
 
 @Client.on_message(filters.command("start", prefixs) & filters.private)
 @Client.on_callback_query(filters.regex("^home_intro$"))
-async def intro_msg(_, update: Message | CallbackQuery):
+async def intro_msg(_, update: Union[Message, CallbackQuery]):
     if isinstance(update, CallbackQuery):
         try:
             await update.answer()
@@ -66,17 +66,19 @@ async def intro_msg(_, update: Message | CallbackQuery):
             file.write(value + "\n")
 
     text = f"Hi {update.from_user.first_name}!\n\nUse this bot to download videos from the pornhub.com site by providing the name of the video you want to download or you can also search for the video you want to download via inline mode.\n\nJoin the redirected channel in order to use this bot!"
-    button = InlineKeyboardMarkup[
+    button = InlineKeyboardMarkup(
         [
-            InlineKeyboardButton(
-                "• Channel •", url=f"https://t.me/{sub_chat}",
-            ),
-        ],[
-            InlineKeyboardButton(
-                "Terms of use & Privacy", callback_data="terms",
-            ),
-        ],
-    ]
+            [
+                InlineKeyboardButton(
+                    "• Channel •", url=f"https://t.me/{sub_chat}",
+                )
+            ],[
+                InlineKeyboardButton(
+                    "Terms of use & Privacy", callback_data="terms",
+                ),
+            ],
+        ]
+    )
 
     try:
         await method(text, reply_markup=button)
@@ -163,6 +165,6 @@ async def command_list(_, update: Message):
 » /gcast - broadcast message
     """
     if update.from_user.id in sudoers:
-        await update.reply_text("text_1")
+        await update.reply_text(text_1)
     else:
-        await update.reply_text("text_2")
+        await update.reply_text(text_2)
