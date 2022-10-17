@@ -2,7 +2,7 @@ from pyrogram import Client, idle
 from pyrogram.errors import UserNotParticipant
 from asyncio import get_event_loop_policy
 
-from .config import API_ID, API_HASH, TOKEN
+from .config import API_ID, API_HASH, TOKEN, log_chat
 
 
 bot = Client(
@@ -21,7 +21,7 @@ async def main():
         await bot.send_message(
             log_chat, "✅ <b>PornHub started!</b>\n\n🔖 <b>Version:</b> <code>v1.0 (2022)</code>\n🔥 <b>Pyrogram:</b> <code>v2.0.58</code>",
         )
-        print("✅ Bot is active!")
+        print("\n✅ Bot is active!")
     except UserNotParticipant as e:
         print(f"Error: {e}\n\nPlease make sure if the bot has been added to the log chat and the bot is admin in the group!")
         return

@@ -102,7 +102,7 @@ We ensure that your search data in this bot is protected safely.  Whoever you ar
 
 👉🏻 Press the <b>green button</b> to declare that you have <b>read and accepted these conditions</b> to use this bot, otherwise cancel.
     """
-    await q.edit_message_text("text", reply_markup=button_a1)
+    await q.edit_message_text(text, reply_markup=button_a1)
 
 
 @Client.on_callback_query(filters.regex("^final_page$"))

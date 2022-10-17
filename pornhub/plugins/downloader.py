@@ -20,9 +20,9 @@ from pyrogram.errors import ChatAdminRequired, UserNotParticipant, ChatWriteForb
 
 
 if os.path.exists("downloads"):
-    print("file is exists")
+    print("✅ file is exist")
 else:
-    print("file has made")
+    print("✅ file has made")
 
 
 active = []
@@ -130,7 +130,7 @@ async def inline_search(c: Client, q: InlineQuery):
             InlineQueryResultArticle(
                 title=vid.title,
                 input_message_content=InputTextMessageContent(
-                    message_text=msg,
+                    message_text=text,
                 ),
             ),
         )
