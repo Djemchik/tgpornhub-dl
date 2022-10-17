@@ -1,7 +1,7 @@
 import os
 import asyncio
 
-from .config import log_chat, sub_chat
+from ..config import log_chat, sub_chat
 from .function import download_progress_hook
 from pornhub_api import PornhubApi
 from pornhub_api.backends.aiohttp import AioHttpBackend

@@ -6,7 +6,7 @@ from pyrogram.types import (
     InlineKeyboardMarkup,
     Message,
 )
-from .config import prefixs, sub_chat, sudoers
+from ..config import prefixs, sub_chat, sudoers
 
 
 sudofilter = filters.user(sudoers)
