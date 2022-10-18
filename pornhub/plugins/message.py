@@ -65,7 +65,7 @@ async def intro_msg(_, update: Union[Message, CallbackQuery]):
         else:
             file.write(value + "\n")
 
-    text = f"Hi {update.from_user.first_name}!\n\nUse this bot to download videos from the pornhub.com site by providing the name of the video you want to download or you can also search for the video you want to download via inline mode.\n\nJoin the redirected channel in order to use this bot!"
+    text = f"👋🏻 Hi {update.from_user.first_name}!\n\nUse this bot to download videos from the pornhub.com site by providing the name of the video you want to download or you can also search for the video you want to download via inline mode.\n\n💭 Join the redirected channel in order to use this bot!"
     button = InlineKeyboardMarkup(
         [
             [
@@ -109,7 +109,7 @@ We ensure that your search data in this bot is protected safely.  Whoever you ar
 async def greets(_, q: CallbackQuery):
     await q.answer("Thanks for agreeing to the bot policy!")
     await q.edit_message_text(
-        f"Hi {q.from_user.first_name}!\n\nYou can browse this bot now!",
+        f"Hi {q.from_user.first_name}!\n\nYou can browse this bot now, just tap one of the button below and enter any name of the video you want to download.",
         reply_markup=button_a2,
     )
 

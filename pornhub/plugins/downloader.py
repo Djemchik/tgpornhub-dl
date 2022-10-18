@@ -93,7 +93,7 @@ async def inline_search(c: Client, q: InlineQuery):
                 ),
             ),
         )
-        await InlineQuery.answer(
+        await q.answer(
             results,
             switch_pm_text="• Results •",
             switch_pm_parameter="start",
@@ -144,7 +144,7 @@ async def inline_search(c: Client, q: InlineQuery):
             ],
         )
 
-    await InlineQuery.answer(
+    await q.answer(
         results,
         switch_pm_text="• Results •",
         switch_pm_parameter="start",
