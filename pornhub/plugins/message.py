@@ -1,4 +1,5 @@
 from typing import Union
+from datetime import datetime
 from pyrogram import Client, filters
 from pyrogram.errors import MessageNotModified, QueryIdInvalid
 from pyrogram.types import (
@@ -131,6 +132,9 @@ async def bot_statistic(_, update: Message):
 
 @Client.on_message(filters.command("gcast", prefixs) & sudofilter)
 async def broadcast(_, update: Message):
+    if not update.reply_to_message:
+        await update.reply_text("Reply to message for broadcast!")
+        return
     if update.reply_to_message.text:
         await update.reply_text("Broadcasting...")
         query = open("member.txt").readlines()
@@ -165,6 +169,16 @@ async def command_list(_, update: Message):
 » /gcast - broadcast message
     """
     if update.from_user.id in sudoers:
-        await update.reply_text(text_1)
-    else:
         await update.reply_text(text_2)
+    else:
+        await update.reply_text(text_1)
+
+
+@Client.on_message(filters.command("ping", prefixs))
+async def ping(c: Client, u: Message):
+    first = datetime.now()
+    sent = await u.reply_text("<b>pinging...</b>")
+    second = datetime.now()
+    await sent.edit_text(
+       f"🏓 <b>PONG !</b>\n⏱ <code>{(second - first).microseconds / 1000}</code> ms"
+    )

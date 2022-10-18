@@ -44,9 +44,9 @@ def url(filter, client, update):
 url_filter = filters.create(url, name="url_filter")
 
 
-@Client.on_message(~filters.incoming & filters.private, group=-1)
-@Client.on_edited_message()
-async def force_channel(c: Client, u: Message):
+@Client.on_message(filters.incoming & filters.private, group=-1)
+@Client.on_edited_message(filters.incoming & filters.private, group=-1)
+async def subscribe_channel(c: Client, u: Message):
     if not sub_chat:
         return
     try:
@@ -133,16 +133,16 @@ async def inline_search(c: Client, q: InlineQuery):
                 input_message_content=InputTextMessageContent(
                     message_text=text,
                 ),
+                description=f"Duration: `{vid.duration}`\nViews: `{vid.views}`\nRating: `{vid.rating}`",
+                thumb_url=vid.thumb,
+                reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton("watch in web", url=vid.url),
+                        ],
+                    ],
+                ),
             ),
-        )
-        description=f"Duration: `{vid.duration}`\nViews: `{vid.views}`\nRating: `{vid.rating}`",
-        thumb_url=vid.thumb,
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton("watch in web", url=vid.url),
-                ],
-            ],
         )
 
     await q.answer(
@@ -201,7 +201,7 @@ async def get_video(c: Client, q: CallbackQuery):
         if file.endswith(".mp4"):
             await q.message.reply_video(
                 f"{file}",
-                caption="The content you requested has been successfully downloaded, enjoy!",
+                caption="The content you requested has been successfully downloaded!",
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
