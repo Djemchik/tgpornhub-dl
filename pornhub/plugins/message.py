@@ -123,8 +123,8 @@ async def show_files(_, update: Message):
 
 @Client.on_message(filters.command("stats", prefixs) & sudofilter)
 async def bot_statistic(_, update: Message):
-    users = open("member.txt").readlines()
-    stats = open("member.txt").read()
+    users = open("users.txt").readlines()
+    stats = open("users.txt").read()
     total = len(users)
     await update.reply_text(f"Total: {total} users")
     await update.reply_text(f"{stats}")
@@ -136,8 +136,8 @@ async def broadcast(_, update: Message):
         await update.reply_text("Reply to message for broadcast!")
         return
     if update.reply_to_message.text:
-        await update.reply_text("Broadcasting...")
-        query = open("member.txt").readlines()
+        await update.reply_text("Message broadcasted!")
+        query = open("users.txt").readlines()
         for row in query:
             try:
                 resp = update.reply_to_message

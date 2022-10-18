@@ -133,7 +133,7 @@ async def inline_search(c: Client, q: InlineQuery):
                 input_message_content=InputTextMessageContent(
                     message_text=text,
                 ),
-                description=f"Duration: `{vid.duration}`\nViews: `{vid.views}`\nRating: `{vid.rating}`",
+                description=f"Duration: {vid.duration}\nViews: {vid.views}\nRating: {vid.rating}",
                 thumb_url=vid.thumb,
                 reply_markup=InlineKeyboardMarkup(
                     [
