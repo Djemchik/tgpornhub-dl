@@ -11,9 +11,7 @@ bot = Client(
     api_hash=API_HASH,
     bot_token=TOKEN,
     plugins=dict(root="pornhub.plugins"),
-    workers=24,
     in_memory=True,
-    sleep_threshold=180,
 )
 
 
