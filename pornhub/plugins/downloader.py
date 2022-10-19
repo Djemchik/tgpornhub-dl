@@ -1,7 +1,6 @@
 import os
 import asyncio
 import youtube_dl
-import downloads
 
 from ..config import log_chat, sub_chat
 from .function import download_progress_hook
@@ -202,7 +201,7 @@ async def get_video(c: Client, q: CallbackQuery):
         if file.endswith(".mp4"):
             await q.message.reply_video(
                 f"{file}",
-                thumb=downloads/src/pornhub.jpeg,
+                thumb="downloads/src/pornhub.jpeg",
                 width=1280,
                 height=720,
                 caption="The content you requested has been successfully downloaded!",
