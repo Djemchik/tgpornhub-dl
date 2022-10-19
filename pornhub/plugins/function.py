@@ -1,6 +1,6 @@
 import asyncio
 import threading
-from pyrogram.errors.exceptions import MessageNotModified, FloodWait
+from pyrogram.errors import MessageNotModified, FloodWait
 
 
 def humanbytes(size):
@@ -21,7 +21,7 @@ def edit_msg(client, message, to_edit):
     except MessageNotModified:
         pass
     except FloodWait as e:
-        client.loop.create_task(asyncio.sleep(e.x))
+        client.loop.create_task(asyncio.sleep(e.value))
     except TypeError:
         pass
 
