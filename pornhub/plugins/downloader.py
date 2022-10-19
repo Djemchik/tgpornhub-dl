@@ -60,7 +60,7 @@ async def subscribe_channel(c: Client, u: Message):
                 url = chat_info.invite_link
             try:
                 await u.reply_text(
-                    f"Hi {u.from_user.first_name}!\n\nYou must join the redirected channel in order to use this bot, if you've done it, please restart this bot!",
+                    f"Hi {u.from_user.first_name}!\n\nYou must join the redirected channel in order to use this bot, if you've done it, please restart this bot!\n\nUse » /restart",
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
@@ -126,12 +126,12 @@ async def inline_search(c: Client, q: InlineQuery):
                 f"Link: {vid.url}")
 
         text = f"{vid.url}"
-         
+
         results.append(
             InlineQueryResultArticle(
                 title=vid.title,
                 input_message_content=InputTextMessageContent(
-                    message_text=text,
+                    message_text=text, disable_web_page_preview=True,
                 ),
                 description=f"Duration: {vid.duration}\nViews: {vid.views}\nRating: {vid.rating}",
                 thumb_url=vid.thumb,
@@ -201,6 +201,9 @@ async def get_video(c: Client, q: CallbackQuery):
         if file.endswith(".mp4"):
             await q.message.reply_video(
                 f"{file}",
+                thumb=downloads/src/pornhub.jpeg,
+                width=1280,
+                height=720,
                 caption="The content you requested has been successfully downloaded!",
                 reply_markup=InlineKeyboardMarkup(
                     [

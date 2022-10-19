@@ -11,7 +11,9 @@ bot = Client(
     api_hash=API_HASH,
     bot_token=TOKEN,
     plugins=dict(root="pornhub.plugins"),
+    workers=24,
     in_memory=True,
+    sleep_threshold=180,
 )
 
 
@@ -21,7 +23,7 @@ async def main():
         await bot.send_message(
             log_chat, "✅ <b>PornHub started!</b>\n\n🔖 <b>Version:</b> <code>v1.0 (2022)</code>\n🔥 <b>Pyrogram:</b> <code>v2.0.58</code>",
         )
-        print("\n✅ Bot is active!")
+        print("✅ Bot is active!")
     except UserNotParticipant as e:
         print(f"Error: {e}\n\nPlease make sure if the bot has been added to the log chat and the bot is admin in the group!")
         return

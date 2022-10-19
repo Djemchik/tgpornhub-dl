@@ -45,7 +45,7 @@ button_a2 = InlineKeyboardMarkup(
 )
 
 
-@Client.on_message(filters.command("start", prefixs) & filters.private)
+@Client.on_message(filters.command(["start", "restart"], prefixs) & filters.private)
 @Client.on_callback_query(filters.regex("^home_intro$"))
 async def intro_msg(_, update: Union[Message, CallbackQuery]):
     if isinstance(update, CallbackQuery):
@@ -115,28 +115,23 @@ async def greets(_, q: CallbackQuery):
     )
 
 
-@Client.on_message(filters.command("files", prefixs))
-async def show_files(_, update: Message):
-    files = os.listdir("downloads")
-    await update.reply(files)
-
-
 @Client.on_message(filters.command("stats", prefixs) & sudofilter)
-async def bot_statistic(_, update: Message):
+async def bot_statistic(c: Client, u: Message):
     users = open("users.txt").readlines()
-    stats = open("users.txt").read()
     total = len(users)
-    await update.reply_text(f"Total: {total} users")
-    await update.reply_text(f"{stats}")
+    await c.send_document(
+        u.chat.id,
+        "users.txt", caption=f"Total: {total} users",
+    )
 
 
-@Client.on_message(filters.command("gcast", prefixs) & sudofilter)
+@Client.on_message(filters.command(["gcast", "broadcast"], prefixs) & sudofilter)
 async def broadcast(_, update: Message):
     if not update.reply_to_message:
         await update.reply_text("Reply to message for broadcast!")
         return
     if update.reply_to_message.text:
-        await update.reply_text("Message broadcasted!")
+        await update.reply_text("✅ Broadcast success!")
         query = open("users.txt").readlines()
         for row in query:
             try:
@@ -156,7 +151,6 @@ async def command_list(_, update: Message):
 » /start - start this bot
 » /help  - showing this message
 » /ping  - check bot status
-» /files - show downloaded files
     """
     text_2 = """
 🛠 Command list:
@@ -164,7 +158,6 @@ async def command_list(_, update: Message):
 » /start - start this bot
 » /help  - showing this message
 » /ping  - check bot status
-» /files - show downloaded files
 » /stats - show bot statistic
 » /gcast - broadcast message
     """
