@@ -1,6 +1,7 @@
 import os
 import asyncio
 import youtube_dl
+import downloads
 
 from ..config import log_chat, sub_chat
 from .function import download_progress_hook
