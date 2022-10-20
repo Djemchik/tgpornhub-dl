@@ -1,7 +1,6 @@
 from typing import Union
 from datetime import datetime
 from pyrogram import Client, filters
-from pyrogram.errors import MessageNotModified, QueryIdInvalid
 from pyrogram.types import (
     CallbackQuery,
     InlineKeyboardButton,
@@ -51,10 +50,10 @@ async def intro_msg(_, update: Message):
     with open("users.txt", "a+") as file:
         file.seek(0)
         line = file.read().splitlines()
-        if value in line:
-            print(f"User {value} is using the bot")
+        if match in line:
+            print(f"User {match} is using the bot")
         else:
-            file.write(value + "\n")
+            file.write(match + "\n")
     
     method = update.reply_text
     text = f"👋🏻 Hi {update.from_user.first_name}!\n\nUse this bot to download videos from the pornhub.com site by providing the name of the video you want to download or you can also search for the video you want to download via inline mode.\n\n💭 Join the redirected channel in order to use this bot!"
