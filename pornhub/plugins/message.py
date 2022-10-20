@@ -58,11 +58,12 @@ async def intro_msg(_, update: Union[Message, CallbackQuery]):
         method = update.reply_text
     
     value = str(update.chat.id)
+    value = str(CallbackQuery.message.chat.id)
     with open("users.txt", "a+") as file:
         file.seek(0)
         line = file.read().splitlines()
         if value in line:
-            print(f"User: {value} is using the bot")
+            print(f"User {value} is using the bot")
         else:
             file.write(value + "\n")
 
