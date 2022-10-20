@@ -46,19 +46,8 @@ button_a2 = InlineKeyboardMarkup(
 
 
 @Client.on_message(filters.command(["start", "restart"], prefixs) & filters.private)
-@Client.on_callback_query(filters.regex("^home_intro$"))
-async def intro_msg(_, update: Union[Message, CallbackQuery]):
-    if isinstance(update, CallbackQuery):
-        try:
-            await update.answer()
-        except QueryIdInvalid:
-            pass
-        method = update.edit_message_text
-    else:
-        method = update.reply_text
-    
-    value = str(update.chat.id)
-    value = str(CallbackQuery.message.chat.id)
+async def intro_msg(_, update: Message):
+    match = str(update.chat.id)
     with open("users.txt", "a+") as file:
         file.seek(0)
         line = file.read().splitlines()
@@ -66,7 +55,8 @@ async def intro_msg(_, update: Union[Message, CallbackQuery]):
             print(f"User {value} is using the bot")
         else:
             file.write(value + "\n")
-
+    
+    method = update.reply_text
     text = f"👋🏻 Hi {update.from_user.first_name}!\n\nUse this bot to download videos from the pornhub.com site by providing the name of the video you want to download or you can also search for the video you want to download via inline mode.\n\n💭 Join the redirected channel in order to use this bot!"
     button = InlineKeyboardMarkup(
         [
@@ -81,11 +71,28 @@ async def intro_msg(_, update: Union[Message, CallbackQuery]):
             ],
         ]
     )
+    await method(text, reply_markup=button)
 
-    try:
-        await method(text, reply_markup=button)
-    except MessageNotModified:
-        pass
+
+@Client.on_callback_query(filters.regex("^home_intro$"))
+async def home_page(_, update: CallbackQuery):
+    await update.answer("Accept the policy in order to continue!")
+    method = update.edit_message_text
+    text = f"👋🏻 Hi {update.from_user.first_name}!\n\nUse this bot to download videos from the pornhub.com site by providing the name of the video you want to download or you can also search for the video you want to download via inline mode.\n\n💭 Join the redirected channel in order to use this bot!"
+    button = InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton(
+                    "• Channel •", url=f"https://t.me/{sub_chat}",
+                )
+            ],[
+                InlineKeyboardButton(
+                    "Terms of use & Privacy", callback_data="terms",
+                ),
+            ],
+        ]
+    )
+    await method(text, reply_markup=button)
 
 
 @Client.on_callback_query(filters.regex("^terms$"))
@@ -122,7 +129,7 @@ async def bot_statistic(c: Client, u: Message):
     total = len(users)
     await c.send_document(
         u.chat.id,
-        "users.txt", caption=f"Total: {total} users",
+        "users.txt", caption=f"total: {total} users",
     )
 
 

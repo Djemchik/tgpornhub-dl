@@ -21,9 +21,9 @@ async def main():
         await bot.send_message(
             log_chat, "✅ <b>PornHub started!</b>\n\n🔖 <b>Version:</b> <code>v1.0 (2022)</code>\n🔥 <b>Pyrogram:</b> <code>v2.0.58</code>",
         )
-        print("✅ Bot is active!")
+        print("✅ Bot is active!\n» check log_chat to monitor bot status, if there is none please make one.")
     except UserNotParticipant as e:
-        print(f"Error: {e}\n\nPlease make sure if the bot has been added to the log chat and the bot is admin in the group!")
+        print(f"Error: {e}\n\nPlease make sure if the bot has been added to the log_chat and the bot is admin in the group!")
         return
     await idle()
 
