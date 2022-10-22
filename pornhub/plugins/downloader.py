@@ -154,7 +154,6 @@ async def inline_search(c: Client, q: InlineQuery):
 
 @Client.on_message(url_filter)
 async def options(c: Client, m: Message):
-    print(m.text)
     await m.reply_text(
         "Tap the button to continue action!", 
         reply_markup=InlineKeyboardMarkup(
