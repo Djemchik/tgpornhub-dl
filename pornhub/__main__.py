@@ -1,5 +1,4 @@
 import sys
-import httpx
 import logging
 import platform
 
@@ -34,5 +33,4 @@ async def main():
 
 
 if __name__ == "__main__":
-    # start the bot
     get_event_loop_policy().get_event_loop().run_until_complete(main())
