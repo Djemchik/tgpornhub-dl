@@ -18,18 +18,8 @@ logging.getLogger("pyrogram.client").setLevel(logging.WARNING)
 
 logger = logging.getLogger(__name__)
 
-
 timeout = httpx.Timeout(40, pool=None)
 http = httpx.AsyncClient(http2=True, timeout=timeout)
-
-
-try:
-    import uvloop
-
-    uvloop.install()
-except ImportError:
-    if platform.system() != "Windows":
-        logger.warning("uvloop is not installed and therefore will be disabled.")
 
 
 async def main():

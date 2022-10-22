@@ -2,7 +2,6 @@
 tgcrypto
 pyrogram
 httpx[http2]>=0.18.1,<1.0.0
-uvloop>=0.4.0,<0.17.0; platform_system != "Windows"
 
 # others
 psutil
